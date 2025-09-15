@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>Posts APP</title>
+    
+    {% endblock title %}
+    {% block styles %}
+     <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .post-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .post {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+        .post:last-child {
+            border-bottom: none;
+        }
+        .post h2 {
+            margin-top: 0;
+        }
+        .post a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .post a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    {% endblock styles %}
+
+
+   
+</head>
+<body>
+   <header>
+    <a href={% url 'create_post' %}> Create Post  </a>
+   </header>
+    {% block body %}
+    {% endblock body %}
+</body>
+</html>
