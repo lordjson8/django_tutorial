@@ -13,8 +13,11 @@
                     <form method="post">
                         {% if messages %}
                             {% for message in messages %}
-                            {% if message.level == messages.ERROR %}
+                            {% if message.level == 40 %}
                             <div style=" color:red; ">{{message}}</div>
+                            {% elif message.level == 25 %}
+                            <div style=" color:green; ">{{message}}</div>
+                            
                             {% endif %}
                             {% endfor %}
                         {% endif %}
