@@ -59,7 +59,7 @@
     <h1>Create a New Post</h1>
     <form action="/post/create/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div>
+        {% comment %} <div>
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" maxlength="200" required>
         </div>
@@ -71,7 +71,9 @@
             <label for="file">File:</label>
             <input type="file" id="file" name="file">
         </div>
-        <button type="submit">Create Post</button>
+        {% endcomment %}
+        {{ form.as_p }}
+         <button type="submit">Create Post</button>
     </form>
 </body>
 </html>

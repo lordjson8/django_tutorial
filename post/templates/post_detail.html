@@ -1,120 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ post.title }}</title>
     <style>
-        body {
-            font-family: sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-        }
-        .post-detail-container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .post-meta {
-            color: #666;
-            font-size: 0.9em;
-        }
-        .post-content {
-            margin-top: 20px;
-        }
-        .delete-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #dc3545;
-            text-decoration: none;
-        }
-        .delete-link:hover {
-            text-decoration: underline;
-        }
-             body {
-            font-family: sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-        form {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"],
-        textarea,
-        input[type="file"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box; /* So padding doesn't affect width */
-        }
-        button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
+      body {
+        font-family: sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+      }
+      .post-detail-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .post-meta {
+        color: #666;
+        font-size: 0.9em;
+      }
+      .post-content {
+        margin-top: 20px;
+      }
+      .delete-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: #dc3545;
+        text-decoration: none;
+      }
+      .delete-link:hover {
+        text-decoration: underline;
+      }
+      body {
+        font-family: sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+      }
+      form {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input[type="text"],
+      textarea,
+      input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box; /* So padding doesn't affect width */
+      }
+      button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
     </style>
-</head>
-<body>
-    <div  class="post-detail-container">
-        <h1>{{ post.title }}</h1>
-        <p class="post-meta">Published on {{ post.created_at|date:"F d, Y" }}</p>
-        <div class="post-content">
-           {%csrf_token %}
-            <p >{{ post.content }}</p>
-            {% if post.file %}
-                <p><a href="{{ post.file.url }}">View Attachment</a></p>
-            {% endif %}
-        </div>
-        <a href="{% url 'post_delete' post.id %}" onclick='return confirm("Do you really want to delete ?")' class="delete-link">Delete Post</a>
+  </head>
+  <body>
+    <div class="post-detail-container">
+      <h1>{{ post.title }}</h1>
+      <p class="post-meta">Published on {{ post.created_at|date:"F d, Y" }}</p>
+      <div class="post-content">
+        {%csrf_token %}
+        <p>{{ post.content }}</p>
+        {% if post.file %}
+        <p><a href="{{ post.file.url }}">View Attachment</a></p>
+        {% endif %}
+      </div>
+      <a
+        href="{% url 'post_delete' post.id %}"
+        onclick='return confirm("Do you really want to delete ?")'
+        class="delete-link"
+        >Delete Post</a
+      >
     </div>
-     <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div>
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" maxlength="200" required value="{{post.title}}"">
-        </div>
-        <div>
-            <label for="content">Content:</label>
-            <textarea id="content"  name="content" value="" rows="4" required>{{post.content}}</textarea>
-        </div>
-        <div>
-            <label for="file">File:</label>
-            <input type="file" id="file" name="file" value=>
-        </div>
-        <button type="submit">Create Post</button>
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %} {% comment %}
+      <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" maxlength="200" required
+        value="{{post.title}}"">
+      </div>
+      <div>
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" value="" rows="4" required>
+{{post.content}}</textarea
+        >
+      </div>
+      <div>
+        <label for="file">File:</label>
+        <input type="file" id="file" name="file" value=>
+      </div>
+      {% endcomment %} {% for field in form %}
+
+      <div >{{field}}</div>
+      {% endfor %}
+      <button type="submit">Create Post</button>
     </form>
-</body>
+  </body>
 </html>
